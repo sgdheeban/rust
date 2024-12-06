@@ -2,14 +2,16 @@
     println!("Hello, world 2!");
 }*/
 
+#[derive(Debug)]
 struct Rectangle {
     height1: u32,
     width1: u32,
 }
 
 fn main() {
+    let scale = 2;
     let rect = Rectangle {
-        height1: 30,
+        height1: dbg!(30*scale),
         width1: 50,
     };
 
@@ -17,7 +19,9 @@ fn main() {
         area(&rect)
     );
 
-    println!("h: {0}, w: {1}", rect.height1, rect.width1);
+    println!("rect1 is {rect:?}");
+
+    dbg!(&rect);
 
 }
 
