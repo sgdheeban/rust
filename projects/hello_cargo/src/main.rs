@@ -20,6 +20,10 @@ impl Rectangle {
     fn width1(&self) -> u32 {
         self.width1
     }
+
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.height1 > other.height1 && self.width1 > other.width1
+    }
 }
 
 fn main() {
@@ -28,6 +32,16 @@ fn main() {
         height1: dbg!(30*scale),
         width1: 50,
     };
+
+    let rect2 = Rectangle {
+        width1: 10,
+        height1: 40,
+    };
+    let rect3 = Rectangle {
+        width1: 60,
+        height1: 45,
+    };
+
 
     println!( "{}", 
         area(&rect)
@@ -47,6 +61,9 @@ fn main() {
     else {
         println!("It's not a wider rectangle of width {}", rect.width1());
     }
+
+    println!("Can rect1 hold rect2? {}", rect.can_hold(&rect2));
+    println!("Can rect1 hold rect3? {}", rect.can_hold(&rect3));
 
 }
 
