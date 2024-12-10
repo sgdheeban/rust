@@ -9,6 +9,14 @@ struct Rectangle {
 }
 
 impl Rectangle {
+
+    fn square(size :u32) -> Self {
+        Self {
+            height1: size,
+            width1: size,
+        }
+    }
+
     fn area2(&self) -> u32 {
         self.height1*self.width1
     }
@@ -42,12 +50,14 @@ fn main() {
         height1: 45,
     };
 
-
     println!( "{}", 
         area(&rect)
     );
 
     println!("rect1 is {rect:?}");
+    
+    let sq = Rectangle::square(3);     
+    println!("Printing a square height: {} and width: {}", sq.height1, sq.width1);
 
     dbg!(&rect);
 
