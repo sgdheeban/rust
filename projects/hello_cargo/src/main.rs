@@ -116,6 +116,14 @@ fn roll_dice_2(x: i32) {
     }
 }
 
+fn roll_dice_3(x: i32) {
+    match x {
+        3 => put_on_fancy_hat(),
+        7 => remove_fancy_hat(),
+        _ => (),
+    }
+}
+
 fn main() {
     let scale = 2;
     let rect = Rectangle {
@@ -181,6 +189,7 @@ fn main() {
     roll_dice(7);
     roll_dice(9);
     roll_dice_2(9);
+    roll_dice_3(9);
 
 }
 
