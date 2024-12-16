@@ -1,6 +1,8 @@
-/*fn main() {
-    println!("Hello, world 2!");
-}*/
+#[derive(Debug)]
+enum IPAddrKind {
+    V4,
+    V6,
+}
 
 #[derive(Debug)]
 struct Rectangle {
@@ -32,6 +34,10 @@ impl Rectangle {
     fn can_hold(&self, other: &Rectangle) -> bool {
         self.height1 > other.height1 && self.width1 > other.width1
     }
+}
+
+fn route(ip:IPAddrKind) {
+    println!("{:#?}",ip);
 }
 
 fn main() {
@@ -74,6 +80,10 @@ fn main() {
 
     println!("Can rect1 hold rect2? {}", rect.can_hold(&rect2));
     println!("Can rect1 hold rect3? {}", rect.can_hold(&rect3));
+
+
+    route(IPAddrKind::V4);
+    route(IPAddrKind::V6);
 
 }
 
