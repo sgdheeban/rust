@@ -21,6 +21,20 @@ enum Coin {
 }
 
 #[derive(Debug)]
+enum UsState2 {
+    Texas,
+    Washington,
+    // --- Snip ---
+}
+
+enum Coin2 {
+    Penny,
+    Nickel,
+    Dime, 
+    Quater(UsState2),
+}
+
+#[derive(Debug)]
 struct Rectangle {
     height1: u32,
     width1: u32,
@@ -124,6 +138,16 @@ fn roll_dice_3(x: i32) {
     }
 }
 
+fn count_coins_2(coin2: Coin2, mut count: i32) -> i32{
+    if let Coin2::Quater(state) = coin2 {
+        println!("Coin is a Quarter from {state:?}");
+    } else {
+        count+=1;
+        println!("increasing counter, {count}");
+    }
+    count
+}
+
 fn main() {
     let scale = 2;
     let rect = Rectangle {
@@ -190,6 +214,22 @@ fn main() {
     roll_dice(9);
     roll_dice_2(9);
     roll_dice_3(9);
+
+    let config_max = Some(10);
+    if let Some(max_val) = config_max {
+        println!("Config maxed at {:#?}", max_val)
+    }
+
+    let mut count=0;
+
+    count = count_coins_2(Coin2::Penny, count);
+    count = count_coins_2(Coin2::Dime, count);
+    count = count_coins_2(Coin2::Nickel, count);
+    count = count_coins_2(Coin2::Quater(UsState2::Texas), count);
+    count = count_coins_2(Coin2::Quater(UsState2::Washington), count);
+
+    println!("final count outside {count}");
+
 
 }
 
