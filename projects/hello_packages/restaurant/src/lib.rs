@@ -6,6 +6,12 @@ mod back_of_house {
         seasonal_fruit: String,
     }
 
+    #[derive(Debug)]
+    pub enum Appetizer {
+        Soup, 
+        Salad
+    }
+
     impl Breakfast {
         pub fn summer(toast: &str) -> Breakfast {
             Breakfast {
@@ -80,5 +86,9 @@ pub fn eat_at_a_restaurant() {
     // now let's try to mutate & print struct member 🦀
     breakfast.toast=String::from("english");
     println!("alive {:#?}", breakfast.toast);
+
+    println!("Available appetizers are {:#?} and {:#?}", back_of_house::Appetizer::Soup, back_of_house::Appetizer::Salad);
+
+
 
 }
