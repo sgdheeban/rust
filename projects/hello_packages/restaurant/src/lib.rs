@@ -1,4 +1,25 @@
 mod back_of_house {
+
+    #[derive(Debug)]
+    pub struct Breakfast {
+        pub toast: String,
+        seasonal_fruit: String,
+    }
+
+    impl Breakfast {
+        pub fn summer(toast: &str) -> Breakfast {
+            Breakfast {
+                toast: String::from(toast),
+                seasonal_fruit: String::from("Peaches"),
+            }
+        }
+
+        // borrow instead of move, which is the default
+        pub fn print_menu(&self) {
+            println!("Today's menu is {} and {}",&self.toast, &self.seasonal_fruit);
+        }
+    }
+
     pub fn fix_incorrect_order() {
         cook_order();
         super::deliver_order();
@@ -46,4 +67,18 @@ pub fn eat_at_a_restaurant() {
 
     // relative path for serving
     front_of_house::serving::fix_order();
+
+    // accessing structs in another module
+    // Order a breakfast with french toast
+    // Borrowing instead of moving, while at it, let's make it mutable as well
+    let mut breakfast = back_of_house::Breakfast::summer("french");
+    back_of_house::Breakfast::print_menu(&breakfast);
+
+    // our breakfast is still alive after borrow, unlike move 🦀
+    println!("alive {:#?}", breakfast);
+
+    // now let's try to mutate & print struct member 🦀
+    breakfast.toast=String::from("english");
+    println!("alive {:#?}", breakfast.toast);
+
 }
