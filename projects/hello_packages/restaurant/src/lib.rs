@@ -46,6 +46,14 @@ mod front_of_house {
             println!("add_to_wait_list via relative path: {}", relative_path);
         }
 
+        pub fn is_full(val: bool) {
+            if val {
+                println!("Restaurant is full.");
+            } else {
+                println!("Restaurant is not full.");
+            }
+        }
+
         //fn seat_at_table() {}
     }
 
@@ -63,6 +71,9 @@ mod front_of_house {
         //fn take_payment() {}
     }
 }
+
+// Cool re-exporting of a specific function from within a private module
+pub use crate::front_of_house::hosting::is_full;
 
 pub fn eat_at_a_restaurant() {
     // absolute path
@@ -89,6 +100,10 @@ pub fn eat_at_a_restaurant() {
 
     println!("Available appetizers are {:#?} and {:#?}", back_of_house::Appetizer::Soup, back_of_house::Appetizer::Salad);
 
+    // String is a owenable type default to utf-8, growable and managed on heap by Rust, crazy, this is why the crab works!
+    let crab_emoji = String::from("🦀");
 
+    println!("Calling from inside eat_at_a_restaurant, inside view with some special unfilled seats for VIPs {}", crab_emoji);
+    is_full(false);
 
 }
