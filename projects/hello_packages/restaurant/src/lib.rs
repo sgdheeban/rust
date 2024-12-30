@@ -1,68 +1,13 @@
-mod back_of_house {
 
-    #[derive(Debug)]
-    pub struct Breakfast {
-        pub toast: String,
-        seasonal_fruit: String,
-    }
-
-    #[derive(Debug)]
-    pub enum Appetizer {
-        Soup, 
-        Salad
-    }
-
-    impl Breakfast {
-        pub fn summer(toast: &str) -> Breakfast {
-            Breakfast {
-                toast: String::from(toast),
-                seasonal_fruit: String::from("Peaches"),
-            }
-        }
-
-        // borrow instead of move, which is the default
-        pub fn print_menu(&self) {
-            println!("Today's menu is {} and {}",&self.toast, &self.seasonal_fruit);
-        }
-    }
-
-    pub fn fix_incorrect_order() {
-        cook_order();
-        super::deliver_order();
-    }
-
-    fn cook_order() {
-        println!("Cooking order");
-    }
-}
+mod front_of_house;
+mod back_of_house;
 
 fn deliver_order() {
     println!("Deliver order");
 }
 
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_wait_list(relative_path: bool) {
-            println!("add_to_wait_list via relative path: {}", relative_path);
-        }
-
-        //fn seat_at_table() {}
-    }
-
-    pub mod serving {
-        use crate::back_of_house;
-
-        pub fn fix_order() {
-            back_of_house::fix_incorrect_order();
-        }
-
-        //fn take_order() {}
-
-        //fn serve_order() {}
-
-        //fn take_payment() {}
-    }
-}
+// Cool re-exporting of a specific function from within a private module
+pub use crate::front_of_house::hosting::is_full;
 
 pub fn eat_at_a_restaurant() {
     // absolute path
@@ -89,6 +34,10 @@ pub fn eat_at_a_restaurant() {
 
     println!("Available appetizers are {:#?} and {:#?}", back_of_house::Appetizer::Soup, back_of_house::Appetizer::Salad);
 
+    // String is a owenable type default to utf-8, growable and managed on heap by Rust, crazy, this is why the crab works!
+    let crab_emoji = String::from("🦀");
 
+    println!("Calling from inside eat_at_a_restaurant, inside view with some special unfilled seats for VIPs {}", crab_emoji);
+    is_full(false);
 
 }
